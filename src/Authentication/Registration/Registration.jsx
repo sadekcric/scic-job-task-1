@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Registration = () => {
   return (
     <div className="">
-      <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+      <div className=" flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <div className="p-8 rounded-2xl bg-white bg-opacity-30 shadow">
             <h2 className=" text-center text-2xl font-bold">Register</h2>
@@ -67,6 +67,15 @@ const Registration = () => {
                 </div>
               </div>
 
+              <div>
+                <label className="text-sm mb-2 block">Your Role</label>
+                <select className="text-gray-700 w-full py-3 rounded-md px-3" name="role" id="" required>
+                  <option value="">Select Role</option>
+                  <option value="user">User</option>
+                  <option value="agent">Agent</option>
+                </select>
+              </div>
+
               <div className="!mt-8">
                 <button
                   type="button"
@@ -76,8 +85,8 @@ const Registration = () => {
                 </button>
               </div>
               <p className="text-sm !mt-8 text-center">
-                Don't have an account?{" "}
-                <Link to="/login" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
+                Do not have an account?{" "}
+                <Link to="/" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
                   login
                 </Link>
               </p>

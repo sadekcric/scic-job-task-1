@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <div className="">
-      <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+      <div className=" flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <div className="p-8 rounded-2xl bg-white bg-opacity-30 shadow">
             <h2 className="text-center text-2xl font-bold">Sign in</h2>
@@ -45,7 +45,7 @@ const Login = () => {
                 </button>
               </div>
               <p className=" text-sm !mt-8 text-center">
-                Don't have an account?{" "}
+                Do not have an account?{" "}
                 <Link to={"/register"} className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
                   Register here
                 </Link>
