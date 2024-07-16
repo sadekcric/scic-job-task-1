@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [pinmessage, setPinMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleCreateUser = (e) => {
     e.preventDefault();
@@ -31,7 +33,14 @@ const Registration = () => {
 
     axios
       .post("http://localhost:5000/users", user)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message) {
+          return toast.error("User Already exist!");
+        }
+
+        navigate("/");
+      })
       .catch((err) => console.log(err.message));
   };
   return (
@@ -41,6 +50,7 @@ const Registration = () => {
           <div className="p-8 rounded-2xl bg-white bg-opacity-30 shadow">
             <h2 className=" text-center text-2xl font-bold">Register</h2>
             <form onSubmit={handleCreateUser} className="mt-8 space-y-4">
+              <Toaster position="top-center" reverseOrder={false} />
               {/* Your Name */}
               <div>
                 <label className=" text-sm mb-2 block">Your Name</label>

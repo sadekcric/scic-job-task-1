@@ -14,9 +14,9 @@ const Dashboard = () => {
 
   return (
     <>
-      {role === "user" && <User />}
-      {role === "admin" && <Admin />}
-      {role === "agent" && <Agent />}
+      {role === "user" && user?.status === "approve" && <User />}
+      {role === "admin" && user?.status === "approve" && <Admin />}
+      {role === "agent" && user?.status === "approve" && <Agent />}
     </>
   );
 };

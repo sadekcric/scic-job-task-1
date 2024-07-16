@@ -19,6 +19,10 @@ const Login = () => {
         if (res.data.message === "User Not Found") {
           return toast.error("User Not Found!");
         }
+
+        if (res.data.status === "pending") {
+          return toast.error("Your Account is Pending!");
+        }
         toast.success("Successfully logged in!");
         setUser(res.data);
         navigate("/dashboard");
