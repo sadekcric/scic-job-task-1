@@ -10,7 +10,10 @@ const UserManagement = () => {
   useEffect(() => {
     axios
       .get("http://localhost:5000/users")
-      .then((res) => setAllUser(res.data))
+      .then((res) => {
+        const filterData = res.data.filter((d) => d.role !== "admin");
+        setAllUser(filterData);
+      })
       .catch((err) => console.log(err.message));
   }, []);
 

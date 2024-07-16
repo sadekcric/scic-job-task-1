@@ -6,7 +6,9 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const { setUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -25,6 +27,7 @@ const Login = () => {
         }
         toast.success("Successfully logged in!");
         setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/dashboard");
       })
       .catch((err) => console.log(err.message));

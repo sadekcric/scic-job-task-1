@@ -4,6 +4,7 @@ import cashout from "../../assets/takeover.png";
 import history from "../../assets/history-book.png";
 import cashIn from "../../assets/cash-flow.png";
 import Card from "../../CommonRoute/Card";
+import { Link } from "react-router-dom";
 
 const User = () => {
   return (
@@ -11,20 +12,30 @@ const User = () => {
       {/* card */}
       <section className="grid grid-cols-2 gap-x-5 gap-y-10 mt-10 ">
         {/* Balance */}
-        <Card img={wallet} title={"Balance"} />
+        <Link to={"/balance"}>
+          <Card img={wallet} title={"Balance"} />
+        </Link>
 
         {/* send Money */}
-        <Card img={send} title={"send money"} />
+        <Link to={"/send-money"}>
+          <Card img={send} title={"send money"} />
+        </Link>
 
         {/* Cash Out */}
-        <Card img={cashout} title={"Cash out"} />
+        <Link to={"/cash-out"}>
+          <Card img={cashout} title={"Cash out"} />
+        </Link>
 
         {/* Cash in */}
-        <Card img={cashIn} title={"cash in"} />
+        <Link to={"/cash-in"}>
+          <Card img={cashIn} title={"cash in"} />
+        </Link>
 
         {/* History */}
         <div className="col-span-2">
-          <Card img={history} title={"History"} />
+          <Link to={"/user-history"}>
+            <Card img={history} title={"History"} />
+          </Link>
         </div>
       </section>
     </>
