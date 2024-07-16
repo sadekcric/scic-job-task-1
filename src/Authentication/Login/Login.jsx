@@ -1,23 +1,49 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Router/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const number = form.number.value;
+    const pin = form.pin.value;
+
+    axios
+      .get(`http://localhost:5000/user?phone=${number}&pin=${pin}`)
+      .then((res) => {
+        if (res.data.message === "User Not Found") {
+          return toast.error("User Not Found!");
+        }
+        toast.success("Successfully logged in!");
+        setUser(res.data);
+        navigate("/dashboard");
+      })
+      .catch((err) => console.log(err.message));
+  };
+
   return (
     <div className="">
       <div className=" flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <div className="p-8 rounded-2xl bg-white bg-opacity-30 shadow">
             <h2 className="text-center text-2xl font-bold">Sign in</h2>
-            <form className="mt-8 space-y-4">
+            <form onSubmit={handleLogin} className="mt-8 space-y-4">
+              <Toaster position="top-center" reverseOrder={false} />
               {/* Phone Number */}
               <div>
                 <label className=" text-sm mb-2 block">Phone no</label>
                 <div className="relative flex items-center">
                   <input
-                    name="username"
-                    type="text"
+                    name="number"
+                    type="number"
                     required
                     className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#E2126D]"
-                    placeholder="Enter user name"
+                    placeholder="Enter Phone Number"
                   />
                 </div>
               </div>
@@ -31,7 +57,7 @@ const Login = () => {
                     type="password"
                     required
                     className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#E2126D]"
-                    placeholder="Enter password"
+                    placeholder="Enter PIN"
                   />
                 </div>
               </div>

@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const info = { user };
+
+  console.log(user);
+  const info = { user, setUser };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };
 
