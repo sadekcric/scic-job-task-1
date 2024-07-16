@@ -17,8 +17,9 @@ const SendMoney = () => {
     const pin = form.pin.value;
 
     let balance = form.balance.value;
+    console.log(balance);
 
-    if (user.balance < balance) {
+    if (balance > user.balance) {
       return toast.error("You have no enough Balance!");
     }
 
@@ -37,6 +38,9 @@ const SendMoney = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data) {
+          axios.get(`http://localhost:5000/user?phone=${user.phone}&pin=${pin}`).then((res) => {
+            localStorage.setItem("user", JSON.stringify(res.data));
+          });
           return toast.success("Send money Successful!");
         }
       })
