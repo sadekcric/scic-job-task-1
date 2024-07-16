@@ -1,5 +1,19 @@
+import { useContext } from "react";
+import { AuthContext } from "./../../Router/AuthProvider";
+
 const BalanceDetails = () => {
-  return <div>This is BalanceDetails</div>;
+  const { user } = useContext(AuthContext);
+
+  if (user?.role !== "user") {
+    return;
+  }
+  return (
+    <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+      <h3 className="text-2xl font-semibold text-center">
+        <span className="text-3xl">Balance:</span> <br /> {user?.balance} Taka
+      </h3>
+    </div>
+  );
 };
 
 export default BalanceDetails;
