@@ -7,11 +7,13 @@ const AgentHistory = () => {
   const [sliceTransaction, setSliceTransaction] = useState([]);
 
   useEffect(() => {
-    const transactions = [...user.transaction].reverse();
-    if (user?.transaction.length > 10) {
-      setSliceTransaction(transactions.slice(0, 10));
-    } else {
-      setSliceTransaction(transactions);
+    if (user) {
+      const transactions = [...user.transaction].reverse();
+      if (user?.transaction.length > 10) {
+        setSliceTransaction(transactions.slice(0, 10));
+      } else {
+        setSliceTransaction(transactions);
+      }
     }
   }, [user]);
 
@@ -39,12 +41,12 @@ const AgentHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {sliceTransaction.map((tr, index) => (
+            {sliceTransaction?.map((tr, index) => (
               <tr key={index} className="border-t border-white border-opacity-20">
-                <td className="py-2">{tr.time}</td>
-                <td>{tr.transactionNo}</td>
-                <td>{tr.transactionBalance}</td>
-                <td>{tr.requestStatus}</td>
+                <td className="py-2">{tr?.time}</td>
+                <td>{tr?.transactionNo}</td>
+                <td>{tr?.transactionBalance}</td>
+                <td>{tr?.requestStatus}</td>
               </tr>
             ))}
           </tbody>
