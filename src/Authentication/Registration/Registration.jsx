@@ -25,7 +25,7 @@ const Registration = () => {
     const name = form.name.value;
     const email = form.email.value;
     const phone = parseInt(form.phone.value);
-    const pin = parseInt(form.pin.value);
+    const pin = String(form.pin.value);
     const role = form.role.value;
     const status = "pending";
 
