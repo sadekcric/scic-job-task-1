@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import GoBack from "../../CommonRoute/GoBack";
 import { AuthContext } from "../../Router/AuthProvider";
 
-const UserHistory = () => {
+const AgentHistory = () => {
   const { user, isLoading } = useContext(AuthContext);
   const [sliceTransaction, setSliceTransaction] = useState([]);
 
   useEffect(() => {
     if (user) {
       const transactions = [...user.transaction].reverse();
-      if (user?.transaction.length > 10) {
+      if (user?.transaction.length > 20) {
         setSliceTransaction(transactions.slice(0, 10));
       } else {
         setSliceTransaction(transactions);
@@ -58,4 +58,4 @@ const UserHistory = () => {
   );
 };
 
-export default UserHistory;
+export default AgentHistory;

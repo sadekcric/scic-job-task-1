@@ -10,7 +10,10 @@ const Admin = () => {
       <Link to={"/user-management"}>
         <Card img={userManagement} title={"User Management"} />
       </Link>
-      <Card img={system} title={"System Monitoring"} />
+
+      <Link to={"/monitoring"}>
+        <Card img={system} title={"System Monitoring"} />
+      </Link>
 
       {/* Log Out */}
       <Logout />

@@ -10,6 +10,8 @@ import UserHistory from "../Components/UserComponent/UserHistory";
 import CashIn from "../Components/UserComponent/CashIn";
 import CashOut from "../Components/UserComponent/CashOut";
 import SendMoney from "../Components/UserComponent/SendMoney";
+import AgentHistory from "../Components/AgentComponent/AgentHistory";
+import SystemMonitoring from "../Dashbord/Admin/SystemMonitoring";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,10 @@ const router = createBrowserRouter([
         path: "user-management",
         element: <UserManagement />,
       },
+      {
+        path: "monitoring",
+        element: <SystemMonitoring />,
+      },
 
       // user
       {
@@ -54,6 +60,12 @@ const router = createBrowserRouter([
       {
         path: "send-money",
         element: <SendMoney />,
+      },
+
+      // Agent
+      {
+        path: "agent-history",
+        element: <AgentHistory />,
       },
     ],
   },

@@ -1,31 +1,28 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import GoBack from "../../CommonRoute/GoBack";
-import { AuthContext } from "../../Router/AuthProvider";
+// import { AuthContext } from "../../Router/AuthProvider";
+import axios from "axios";
 
-const UserHistory = () => {
-  const { user, isLoading } = useContext(AuthContext);
-  const [sliceTransaction, setSliceTransaction] = useState([]);
+const SystemMonitoring = () => {
+  const [transaction, setTransaction] = useState();
 
   useEffect(() => {
-    if (user) {
-      const transactions = [...user.transaction].reverse();
-      if (user?.transaction.length > 10) {
-        setSliceTransaction(transactions.slice(0, 10));
-      } else {
-        setSliceTransaction(transactions);
-      }
-    }
-  }, [user]);
+    axios
+      .get("https://scic-job-task-server-liard.vercel.app/users")
+      .then((res) => {
+        const allTr = res.data.map((tr) => tr.transaction);
+        const oneArr = allTr.flat();
 
-  if (isLoading) {
-    return;
-  }
+        const reverse = [...oneArr].reverse();
 
-  if (!sliceTransaction) {
-    return (
-      <div className="text-xl font-bold uppercase h-[calc(100vh-100px)] flex justify-center items-center">No Transaction History Found</div>
-    );
-  }
+        const undefineFiltered = reverse.filter((vl) => vl !== undefined);
+
+        setTransaction(undefineFiltered);
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
+
+  // console.log(transaction);
 
   return (
     <div className="mt-10">
@@ -41,7 +38,7 @@ const UserHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {sliceTransaction?.map((tr, index) => (
+            {transaction?.map((tr, index) => (
               <tr key={index} className="border-t border-white border-opacity-20">
                 <td className="py-2">{tr?.time}</td>
                 <td>{tr?.transactionNo}</td>
@@ -58,4 +55,4 @@ const UserHistory = () => {
   );
 };
 
-export default UserHistory;
+export default SystemMonitoring;

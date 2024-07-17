@@ -5,7 +5,7 @@ import GoBack from "../../CommonRoute/GoBack";
 const BalanceDetails = () => {
   const { user } = useContext(AuthContext);
 
-  if (user?.role !== "user") {
+  if (user?.role === "admin") {
     return;
   }
   return (
