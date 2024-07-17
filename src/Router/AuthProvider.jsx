@@ -1,17 +1,26 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { createContext } from "react";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const getUser = localStorage.getItem("user");
-    const parseUser = JSON.parse(getUser);
+  const {
+    data: user,
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const getUser = localStorage.getItem("user");
+      const res = await axios.get(`https://scic-job-task-server-liard.vercel.app/users/${getUser}`);
+      const data = res.data;
 
-    setUser(parseUser);
-  }, []);
+      return data;
+    },
+  });
 
-  const info = { user, setUser };
+  const info = { user, refetch, isLoading };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };
 

@@ -6,7 +6,7 @@ import axios from "axios";
 import GoBack from "../../CommonRoute/GoBack";
 
 const SendMoney = () => {
-  const { user } = useContext(AuthContext);
+  const { user, refetch } = useContext(AuthContext);
 
   if (user?.role !== "user") {
     return;
@@ -40,9 +40,7 @@ const SendMoney = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data) {
-          axios.get(`https://scic-job-task-server-liard.vercel.app/user?phone=${user.phone}&pin=${pin}`).then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data));
-          });
+          refetch();
           return toast.success("Send money Successful!");
         }
       })

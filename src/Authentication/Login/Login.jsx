@@ -5,7 +5,7 @@ import { AuthContext } from "../../Router/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
-  const { setUser, user } = useContext(AuthContext);
+  const { refetch, user } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -30,8 +30,9 @@ const Login = () => {
           return toast.error("Your Account is Pending!");
         }
         toast.success("Successfully logged in!");
-        setUser(res.data);
-        localStorage.setItem("user", JSON.stringify(res.data));
+        // setUser(res.data);
+        localStorage.setItem("user", res.data._id);
+        refetch();
         navigate("/dashboard");
       })
       .catch(() => toast.error("User Not Found!"));

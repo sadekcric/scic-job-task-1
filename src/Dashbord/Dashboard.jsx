@@ -6,17 +6,21 @@ import { AuthContext } from "../Router/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
   const [role, setRole] = useState("");
   const navigate = useNavigate();
-
-  if (!user) {
-    navigate("/");
-  }
 
   useEffect(() => {
     setRole(user?.role);
   }, [user]);
+
+  if (isLoading) {
+    return;
+  }
+
+  if (!user) {
+    navigate("/");
+  }
 
   return (
     <>
