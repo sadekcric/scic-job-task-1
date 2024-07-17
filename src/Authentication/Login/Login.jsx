@@ -5,9 +5,13 @@ import { AuthContext } from "../../Router/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
-  const { setUser } = useContext(AuthContext);
+  const { setUser, user } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  if (user) {
+    navigate("/dashboard");
+  }
 
   const handleLogin = (e) => {
     e.preventDefault();

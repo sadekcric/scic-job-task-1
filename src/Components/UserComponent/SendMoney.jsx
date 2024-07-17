@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Router/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SendMoney = () => {
   const { user } = useContext(AuthContext);
@@ -70,6 +71,13 @@ const SendMoney = () => {
           Send Money
         </button>
       </form>
+
+      <div className="text-center">
+        <Link className="py-2 px-4 rounded-md border-2 mt-10 inline-block border-white border-opacity-40 " to={"/dashboard"}>
+          {" "}
+          Go Back
+        </Link>
+      </div>
     </div>
   );
 };

@@ -4,9 +4,16 @@ import cashout from "../../assets/takeover.png";
 import history from "../../assets/history-book.png";
 import cashIn from "../../assets/cash-flow.png";
 import Card from "../../CommonRoute/Card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import logout from "../../assets/logOut.png";
 
 const User = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
   return (
     <>
       {/* card */}
@@ -36,6 +43,13 @@ const User = () => {
           <Link to={"/user-history"}>
             <Card img={history} title={"History"} />
           </Link>
+        </div>
+
+        <div
+          onClick={handleLogout}
+          className="fixed bottom-5 left-[50%] -translate-x-[50%] bg-transparent shadow-md shadow-white border-t border-white border-opacity-20 rounded-full p-3 w-16"
+        >
+          <img src={logout} alt="" />
         </div>
       </section>
     </>

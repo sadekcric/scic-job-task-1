@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "./../../Router/AuthProvider";
+import { Link } from "react-router-dom";
 
 const BalanceDetails = () => {
   const { user } = useContext(AuthContext);
@@ -8,10 +9,15 @@ const BalanceDetails = () => {
     return;
   }
   return (
-    <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+    <div className="h-[calc(100vh-100px)] flex flex-col items-center justify-around ">
       <h3 className="text-2xl font-semibold text-center">
         <span className="text-3xl">Balance:</span> <br /> {user?.balance} Taka
       </h3>
+
+      <Link className="py-2 px-4 rounded-md border-2 border-white border-opacity-40" to={"/dashboard"}>
+        {" "}
+        Go Back
+      </Link>
     </div>
   );
 };
