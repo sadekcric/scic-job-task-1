@@ -32,7 +32,7 @@ const Registration = () => {
     const user = { name, email, phone, pin, role, status };
 
     axios
-      .post("http://localhost:5000/users", user)
+      .post("https://scic-job-task-server-liard.vercel.app/users", user)
       .then((res) => {
         console.log(res.data);
         if (res.data.message) {

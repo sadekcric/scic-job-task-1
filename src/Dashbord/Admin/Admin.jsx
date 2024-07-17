@@ -2,6 +2,7 @@ import Card from "../../CommonRoute/Card";
 import userManagement from "../../assets/userManagement.png";
 import system from "../../assets/system-monitoring.png";
 import { Link } from "react-router-dom";
+import Logout from "../../CommonRoute/Logout";
 
 const Admin = () => {
   return (
@@ -10,6 +11,9 @@ const Admin = () => {
         <Card img={userManagement} title={"User Management"} />
       </Link>
       <Card img={system} title={"System Monitoring"} />
+
+      {/* Log Out */}
+      <Logout />
     </section>
   );
 };

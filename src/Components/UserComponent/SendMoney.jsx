@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../Router/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
+import GoBack from "../../CommonRoute/GoBack";
 
 const SendMoney = () => {
   const { user } = useContext(AuthContext);
@@ -35,11 +36,11 @@ const SendMoney = () => {
     const updateFile = { receiverPhone, pin, balance };
 
     axios
-      .put(`http://localhost:5000/send-money/${user.phone}`, updateFile)
+      .put(`https://scic-job-task-server-liard.vercel.app/send-money/${user.phone}`, updateFile)
       .then((res) => {
         // console.log(res.data);
         if (res.data) {
-          axios.get(`http://localhost:5000/user?phone=${user.phone}&pin=${pin}`).then((res) => {
+          axios.get(`https://scic-job-task-server-liard.vercel.app/user?phone=${user.phone}&pin=${pin}`).then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data));
           });
           return toast.success("Send money Successful!");
@@ -72,12 +73,8 @@ const SendMoney = () => {
         </button>
       </form>
 
-      <div className="text-center">
-        <Link className="py-2 px-4 rounded-md border-2 mt-10 inline-block border-white border-opacity-40 " to={"/dashboard"}>
-          {" "}
-          Go Back
-        </Link>
-      </div>
+      {/* Go Back */}
+      <GoBack />
     </div>
   );
 };

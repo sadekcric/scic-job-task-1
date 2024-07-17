@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../Router/AuthProvider";
+import GoBack from "../../CommonRoute/GoBack";
 
 const CashIn = () => {
   const { user } = useContext(AuthContext);
@@ -17,11 +17,11 @@ const CashIn = () => {
     const cashIn = { agentNumber, requestBalance, pin };
 
     axios
-      .put(`http://localhost:5000/cash-in/${user.phone}`, cashIn)
+      .put(`https://scic-job-task-server-liard.vercel.app/cash-in/${user.phone}`, cashIn)
       .then((res) => {
         // console.log(res.data);
         if (res.data) {
-          axios.get(`http://localhost:5000/user?phone=${user.phone}&pin=${pin}`).then((res) => {
+          axios.get(`https://scic-job-task-server-liard.vercel.app/user?phone=${user.phone}&pin=${pin}`).then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data));
           });
           return toast.success("Cash In Request Successful!");
@@ -57,12 +57,7 @@ const CashIn = () => {
         </button>
       </form>
 
-      <div className="text-center">
-        <Link className="py-2 px-4 rounded-md border-2 mt-10 inline-block border-white border-opacity-40 " to={"/dashboard"}>
-          {" "}
-          Go Back
-        </Link>
-      </div>
+      <GoBack />
     </div>
   );
 };

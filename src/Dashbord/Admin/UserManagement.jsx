@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Router/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import GoBack from "../../CommonRoute/GoBack";
 
 const UserManagement = () => {
   const { user } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const UserManagement = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users")
+      .get("https://scic-job-task-server-liard.vercel.app/users")
       .then((res) => {
         const filterData = res.data.filter((d) => d.role !== "admin");
         setAllUser(filterData);
@@ -28,7 +29,7 @@ const UserManagement = () => {
     const data = { status };
 
     axios
-      .put(`http://localhost:5000/users/status/${id}`, data)
+      .put(`https://scic-job-task-server-liard.vercel.app/users/status/${id}`, data)
       .then((res) => {
         console.log(res.data);
       })
@@ -67,6 +68,8 @@ const UserManagement = () => {
           ))}
         </tbody>
       </table>
+
+      <GoBack />
     </div>
   );
 };

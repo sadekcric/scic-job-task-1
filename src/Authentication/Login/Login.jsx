@@ -20,7 +20,7 @@ const Login = () => {
     const pin = form.pin.value;
 
     axios
-      .get(`http://localhost:5000/user?phone=${number}&pin=${pin}`)
+      .get(`https://scic-job-task-server-liard.vercel.app/user?phone=${number}&pin=${pin}`)
       .then((res) => {
         if (res.data.message === "User Not Found") {
           return toast.error("User Not Found!");
@@ -34,7 +34,7 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/dashboard");
       })
-      .catch((err) => console.log(err.message));
+      .catch(() => toast.error("User Not Found!"));
   };
 
   return (

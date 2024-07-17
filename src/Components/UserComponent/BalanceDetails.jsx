@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "./../../Router/AuthProvider";
-import { Link } from "react-router-dom";
+import GoBack from "../../CommonRoute/GoBack";
 
 const BalanceDetails = () => {
   const { user } = useContext(AuthContext);
@@ -14,10 +14,7 @@ const BalanceDetails = () => {
         <span className="text-3xl">Balance:</span> <br /> {user?.balance} Taka
       </h3>
 
-      <Link className="py-2 px-4 rounded-md border-2 border-white border-opacity-40" to={"/dashboard"}>
-        {" "}
-        Go Back
-      </Link>
+      <GoBack />
     </div>
   );
 };
