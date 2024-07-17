@@ -29,10 +29,6 @@ const SendMoney = () => {
       return toast.error("Send Money Start up to 50 taka!");
     }
 
-    if (balance > 100) {
-      balance -= 5;
-    }
-
     const updateFile = { receiverPhone, pin, balance };
 
     axios

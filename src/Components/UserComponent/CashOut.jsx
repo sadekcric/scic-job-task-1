@@ -5,7 +5,7 @@ import axios from "axios";
 import GoBack from "../../CommonRoute/GoBack";
 
 const CashOut = () => {
-  const { user } = useContext(AuthContext);
+  const { user, refetch } = useContext(AuthContext);
 
   const handleCashOut = (e) => {
     e.preventDefault();
@@ -26,9 +26,7 @@ const CashOut = () => {
       .put(`https://scic-job-task-server-liard.vercel.app/cash-out/${user.phone}`, cashOut)
       .then((res) => {
         if (res.data) {
-          axios.get(`https://scic-job-task-server-liard.vercel.app/user?phone=${user.phone}&pin=${pin}`).then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data));
-          });
+          refetch();
           return toast.success("Cash Out Successful!");
         }
       })

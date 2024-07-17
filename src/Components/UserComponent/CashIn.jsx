@@ -5,7 +5,7 @@ import { AuthContext } from "../../Router/AuthProvider";
 import GoBack from "../../CommonRoute/GoBack";
 
 const CashIn = () => {
-  const { user } = useContext(AuthContext);
+  const { user, refetch } = useContext(AuthContext);
   const handleCashIn = (e) => {
     e.preventDefault();
 
@@ -21,9 +21,7 @@ const CashIn = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data) {
-          axios.get(`https://scic-job-task-server-liard.vercel.app/user?phone=${user.phone}&pin=${pin}`).then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data));
-          });
+          refetch();
           return toast.success("Cash In Request Successful!");
         }
       })
