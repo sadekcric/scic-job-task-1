@@ -25,12 +25,11 @@ const CashOut = () => {
     axios
       .put(`http://localhost:5000/cash-out/${user.phone}`, cashOut)
       .then((res) => {
-        // console.log(res.data);
         if (res.data) {
           axios.get(`http://localhost:5000/user?phone=${user.phone}&pin=${pin}`).then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data));
           });
-          return toast.success("Send money Successful!");
+          return toast.success("Cash Out Successful!");
         }
       })
       .catch((err) => {
@@ -58,7 +57,7 @@ const CashOut = () => {
     /> */}
 
         <button type="submit" className="p-2 bg-white bg-opacity-70 font-semibold w-full mt-5 rounded-md text-[#E2126D]">
-          Send Money
+          Cash Out
         </button>
       </form>
 

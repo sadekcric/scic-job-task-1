@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Router/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const UserManagement = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [allUser, setAllUser] = useState([]);
 
@@ -18,7 +20,7 @@ const UserManagement = () => {
   }, []);
 
   if (user?.role !== "admin") {
-    return;
+    navigate("/");
   }
 
   const handleChange = (e, id) => {
